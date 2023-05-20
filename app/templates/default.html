@@ -69,28 +69,6 @@
                 </button>
             </header>
             <main>
-                <form class="export">
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="date">Fecha Inicio</label>
-                            <input type="date" name="date" id="date">
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Ficha Fin</label>
-                            <input type="date" name="date" id="date">
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Evento</label>
-                            <select name="" id="">
-                                <option value="all" selected>Todos</option>
-                                <option value="">Otros</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit">Exportar Datos
-                        <img src="{% static 'img/file.svg' %}" alt="Exportar datos">
-                    </button>
-                </form>
                 <div class="table">
                     <table>
                         <tr>
@@ -115,6 +93,28 @@
                         </tr>
                     </table>
                     <p>*Para ver más eventos, exporta la base de datos</p>
+                    <form class="export">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="date">Fecha Inicio</label>
+                                <input type="date" name="date" id="date" value="{{dt}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Ficha Fin</label>
+                                <input type="date" name="date" id="date" value="{{dt}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Evento</label>
+                                <select name="" id="">
+                                    <option value="all" selected>Todos</option>
+                                    <option value="">Otros</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit">Exportar Datos
+                            <img src="{% static 'img/file.svg' %}" alt="Exportar datos">
+                        </button>
+                    </form>
                 </div>
             </main>
             <footer>
