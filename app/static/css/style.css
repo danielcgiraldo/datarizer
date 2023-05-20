@@ -110,6 +110,7 @@ div#actions div.relative div.actions {
     border-radius: 5px;
     display: none;
     overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 div#actions.active div.relative div.actions {
@@ -119,15 +120,16 @@ div#actions.active div.relative div.actions {
 div#actions div.relative div.actions button.action {
     width: 100%;
     background-color: transparent;
-    padding: 10px 15px;
+    padding: 13px 15px;
     border-bottom: 1px solid #e0e0e0;
     display: flex;
-
+    font-size: 16px;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     font-weight: 600;
     color: #121212;
+    
 }
 
 div#actions div.relative div.actions button.action:hover {
@@ -135,7 +137,7 @@ div#actions div.relative div.actions button.action:hover {
 }
 
 div#actions div.relative div.actions button.action img {
-    height: 17px;
+    height: 19px;
     width: auto;
 }
 
