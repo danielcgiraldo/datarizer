@@ -55,10 +55,13 @@ div.row {
     align-items: center;
 }
 
-button#actions-btn {
+div#actions {
     position: fixed;
     bottom: 25px;
     right: 25px;
+}
+
+div#actions button#handler-btn {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -66,10 +69,74 @@ button#actions-btn {
     cursor: pointer;
 }
 
-button#actions-btn img {
-    height: 40%;
+div#actions button#handler-btn img {
+    height: 30%;
     width: auto;
     margin-top: 2px;
+}
+
+div#actions button#handler-btn p {
+    font-weight: 500;
+    font-size: 30px;
+    color: #121212;
+    text-align: center;
+    transform: rotate(45deg);
+    margin-left: -2px;
+    display: none;
+}
+
+div#actions.active button#handler-btn p {
+    display: block;
+}
+
+div#actions.active button#handler-btn img {
+    display: none;
+}
+
+div#actions div.relative {
+    position: relative;
+}
+
+div#actions div.relative div.actions {
+    position: absolute;
+    bottom: 60px;
+    width: 200px;
+    right: 0;
+    background-color: white;
+    border-radius: 5px;
+    display: none;
+    overflow: hidden;
+}
+
+div#actions.active div.relative div.actions {
+    display: block;
+}
+
+div#actions div.relative div.actions button.action {
+    width: 100%;
+    background-color: transparent;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    color: #121212;
+}
+
+div#actions div.relative div.actions button.action:hover {
+    background-color: #f7f7f7;
+}
+
+div#actions div.relative div.actions button.action img {
+    height: 17px;
+    width: auto;
+}
+
+div#actions div.relative div.actions button.action:last-child {
+    border-bottom: none;
 }
 
 /* navbar */
@@ -126,7 +193,7 @@ header div.card h1 {
     line-height: 110%;
 }
 
-header div.card label {
+header div.card span {
     font-weight: 500;
     font-size: 7vw;
 }
