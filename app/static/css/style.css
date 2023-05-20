@@ -180,11 +180,12 @@ main form div.form-group {
     width: auto;
     display: flex;
     flex-direction: column;
-    width: calc(50% - 5px);
+    width: calc(50% - 6px);
 }
 
 main form div.form-group:last-child {
     width: 100%;
+    margin-top: -1px;
 }
 
 main form div.form-group label {
@@ -197,7 +198,7 @@ main form div.form-group label {
 
 main form div.row {
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
 }
 
 ::-webkit-calendar-picker-indicator {
