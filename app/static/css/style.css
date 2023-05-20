@@ -37,6 +37,7 @@ body {
 
 button img {
     user-select: none;
+    pointer-events: none;
 }
 
 div.container {
