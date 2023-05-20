@@ -119,7 +119,6 @@ window.onload = () => {
     const actionsContainer = document.getElementById('actions');
     actionsContainer.querySelector("#handler-btn").addEventListener("click", () => {
         actionsContainer.classList.toggle("active");
-        removeEvent();
     });
 
     actionsContainer.querySelector("button.action.add").addEventListener("click", showModal);
