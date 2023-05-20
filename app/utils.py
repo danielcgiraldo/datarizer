@@ -10,4 +10,4 @@ connection_string = f"mongodb+srv://{DB_USER}:{DB_PASSWORD}@{DB_CLUSTER}/{DB_NAM
 client = MongoClient(connection_string)
 db = client[DB_NAME]
 data_collection = db['data']
-user_collection = db['user']
+session_collection = db['session']
