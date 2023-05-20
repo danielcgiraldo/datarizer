@@ -1,0 +1,282 @@
+/*
+------------------ General Stylesheet ------------------
+version:   1.0 
+date:      2023-05-19
+author:    Daniel Castillo Giraldo
+website:   https://github.com/danielcgiraldo
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+/* default css */
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: white;
+    background-color: #121212;
+}
+
+div.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 25px 0;
+}
+
+div.container div.content {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 25px;
+}
+
+div.row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button#actions-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #03dac6;
+    cursor: pointer;
+}
+
+button#actions-btn img {
+    height: 40%;
+    width: auto;
+    margin-top: 2px;
+}
+
+/* navbar */
+
+nav {
+    width: 100%;
+    height: 40px;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+nav img.logo {
+    height: 100%;
+}
+
+nav a {
+    height: 80%;
+    width: auto;
+}
+
+nav a img {
+    height: 100%;
+    width: auto;
+}
+
+/* header */
+
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+header div.card,
+header button.card {
+    width: calc(50% - 7.5px);
+    border-radius: 5px;
+}
+
+header div.card {
+    width: 100%;
+    background-color: #1e1e1e;
+    padding: 20px;
+}
+
+header div.card h1 {
+    font-weight: 500;
+    font-size: 15.5vw;
+    color: #ffffff;
+    line-height: 110%;
+}
+
+header div.card label {
+    font-weight: 500;
+    font-size: 7vw;
+}
+
+header div.card p {
+    font-weight: 500;
+    font-size: 5vw;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+header button.card:last-child:nth-child(even) {
+    width: 100%;
+}
+
+header button.card {
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: var(--bg-color);
+    cursor: pointer;
+}
+
+header button.card div {
+    display: flex;
+    width: 100%;
+}
+
+header button.card div.top {
+    justify-content: flex-end;
+}
+header button.card div.top img {
+    height: 25px;
+}
+
+header button.card h2 {
+    font-weight: 600;
+    color: white;
+    font-size: 5vw;
+    margin-left: 5px;
+}
+
+/* main */
+
+main form {
+    margin-top: 20px;
+}
+
+main form div.form-group {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 5px);
+}
+
+main form div.form-group:last-child {
+    width: 100%;
+    margin-top: -2px;
+}
+
+main form div.form-group label {
+    font-weight: 400;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 7px;
+    margin-bottom: 2px;
+}
+
+main form div.row {
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.5;
+}
+
+main form div.form-group input,
+main form div.form-group select {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 7px;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    padding: 8px 10px;
+}
+
+main form div.form-group select option {
+    color: #121212;
+}
+
+main form button {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: white;
+    color: #121212;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    align-items: center;
+    cursor: pointer;
+}
+
+main form button img {
+    height: 17px;
+    width: auto;
+}
+
+table {
+    border-spacing: 0;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th,
+td {
+    border-collapse: separate;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 5px 0;
+}
+
+th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+tr td:first-child,
+tr th:first-child {
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+tr td:last-child,
+tr th:last-child {
+    padding-left: 10px;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+main div.table p {
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 20px;
+}
