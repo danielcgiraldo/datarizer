@@ -22,6 +22,17 @@
     <!-- Customs -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+    <!-- analytics -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8GVFCPQ6VW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-8GVFCPQ6VW');
+    </script>
+
 </head>
 
 <body>
@@ -51,22 +62,12 @@
                             <th>Hora Evento</th>
                             <th>Evento</th>
                         </tr>
+                        {% for d in data %}
                         <tr>
-                            <td>Row 1, Column 1</td>
-                            <td>Row 1, Column 2</td>
+                            <td>{{ d.date|date:"d/m/Y - H:i:s" }}</td>
+                            <td>{{ d.event }}</td>
                         </tr>
-                        <tr>
-                            <td>Row 2, Column 1</td>
-                            <td>Row 2, Column 2</td>
-                        </tr>
-                        <tr>
-                            <td>Row 3, Column 1</td>
-                            <td>Row 3, Column 2</td>
-                        </tr>
-                        <tr>
-                            <td>Row 4, Column 1</td>
-                            <td>Row 4, Column 2</td>
-                        </tr>
+                        {% endfor %}
                     </table>
                     <p>*Para ver más eventos, exporta la base de datos</p>
                     <form class="export">
@@ -107,6 +108,9 @@
 
 
     <!-- Scripts -->
+    <script>
+        const EVENTS = JSON.parse('{{events}}'.replace(/&#x27;/g, '"'))
+    </script>
     <script src="{% static 'js/script.js' %}"></script>
 
 </body>

@@ -45,7 +45,7 @@ const COLORS = [
 
 const CARDS_CONTAINER = document.querySelector("header")
 
-function addEvent() {
+function addEvent(name) {
     try {
         if (card_i > COLORS.length - 1) {
             //show error label
@@ -63,7 +63,7 @@ function addEvent() {
                 <img src="/static/img/remove.svg" alt="Eliminar evento" class="remove">
             </div>
             <div class="bottom">
-                <h2>Evento 1</h2>
+                <h2>${name}</h2>
             </div>
         `;
         CARDS_CONTAINER.appendChild(card);
@@ -92,7 +92,7 @@ function showModal(ev) {
     const modalContainer = document.getElementById("modal-container");
 
     if (ev.target.classList[1] === "add") {
-        addEvent();
+        addEvent("Prueba");
     } else if (ev.target.classList[1] === "edit") {
         removeEvent();
         CARDS_CONTAINER.classList = "edit"
@@ -114,6 +114,14 @@ window.onload = () => {
     const clockContainer = document.getElementById('clock_component');
     const clock = new Clock(clockContainer);
     clock.start();
+
+    // =============== EVENTS ===============
+
+    if (EVENTS.length > 0) {
+        EVENTS.forEach(event => {
+            addEvent(event)
+        });
+    }
 
     // =============== ACTIONS ===============
     const actionsContainer = document.getElementById('actions');
