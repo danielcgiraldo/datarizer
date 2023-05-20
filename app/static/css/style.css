@@ -81,7 +81,6 @@ div#actions button#handler-btn p {
     color: #121212;
     text-align: center;
     transform: rotate(45deg);
-    margin-left: -2px;
     display: none;
 }
 
