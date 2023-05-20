@@ -43,30 +43,6 @@
                         <span>&nbsp;</span>
                     </div>
                 </div>
-                <button class="card salmon" style="--bg-color: #FF7597">
-                    <div class="top">
-                        <img src="{% static 'img/clock.svg' %}" alt="Nuevo registro">
-                    </div>
-                    <div class="bottom">
-                        <h2>Evento 1</h2>
-                    </div>
-                </button>
-                <button class="card purple" style="--bg-color: #BB86FC">
-                    <div class="top">
-                        <img src="{% static 'img/clock.svg' %}" alt="Nuevo registro">
-                    </div>
-                    <div class="bottom">
-                        <h2>Evento 1</h2>
-                    </div>
-                </button>
-                <button class="card" style="--bg-color: #CF6679">
-                    <div class="top">
-                        <img src="{% static 'img/clock.svg' %}" alt="Nuevo registro">
-                    </div>
-                    <div class="bottom">
-                        <h2>Evento 1</h2>
-                    </div>
-                </button>
             </header>
             <main>
                 <div class="table">
@@ -119,35 +95,15 @@
             </main>
             <footer>
                 <p>© 2023 <a href="https://github.com/danielcgiraldo" target="_blank" rel="noopener noreferrer">Daniel
-                        Castillo</a>. Todos los derechos reservados.</p>
+                        Castillo</a>. CC BY-NC 4.0.</p>
             </footer>
         </div>
     </div>
 
-    <div id="actions">
-        <button id="handler-btn">
-            <img src="{% static 'img/tune.svg' %}" alt="Editar Cronograma" class="edit">
-            <p class="close">+</p>
-        </button>
-        <div class="relative">
-            <div class="actions">
-                <button class="action">
-                    Nuevo Evento
-                    <img src="{% static 'img/add.svg' %}" alt="Editar Cronograma">
-                </button>
-                <button class="action">
-                    Editar Evento
-                    <img src="{% static 'img/edit.svg' %}" alt="Editar Cronograma">
-                </button>
-                <button class="action">
-                    Eliminar Evento
-                    <img src="{% static 'img/remove.svg' %}" alt="Editar Cronograma">
-                </button>
 
-            </div>
-        </div>
+    {% include 'components/actions.html' %}
 
-    </div>
+    {% include 'components/modals.html' %}
 
 
     <!-- Scripts -->

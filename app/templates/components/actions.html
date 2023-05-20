@@ -1,0 +1,24 @@
+{% load static %}
+
+<div id="actions">
+    <button id="handler-btn">
+        <img src="{% static 'img/tune.svg' %}" alt="Editar Cronograma" class="edit">
+        <p class="close">+</p>
+    </button>
+    <div class="relative">
+        <div class="actions">
+            <button class="action add">
+                Nuevo Evento
+                <img src="{% static 'img/add.svg' %}" alt="Editar Cronograma">
+            </button>
+            <button class="action edit">
+                Editar Evento
+                <img src="{% static 'img/edit.svg' %}" alt="Editar Cronograma">
+            </button>
+            <button class="action remove">
+                Eliminar Evento
+                <img src="{% static 'img/remove.svg' %}" alt="Editar Cronograma">
+            </button>
+        </div>
+    </div>
+</div>
