@@ -8,22 +8,8 @@
                 <span>+</span>
             </button>
         </div>
-        <form action="">
-            <div class="form-group">
-                <label for="">Nuevo Nombre</label>
-                <input type="text" name="" id="">
-            </div>
-            <button type="submit">Guardar <img src="{% static 'img/save.svg' %}" alt="Guardar Cambio"></button>
-        </form>
-    </div>
-    <div class="modal remove">
-        <div class="title">
-            <h3>Editar Evento</h3>
-            <button class="close">
-                <span>+</span>
-            </button>
-        </div>
-        <form action="">
+        <form method="post">
+
             <div class="form-group">
                 <label for="">Nuevo Nombre</label>
                 <input type="text" name="" id="">
@@ -33,17 +19,19 @@
     </div>
     <div class="modal add">
         <div class="title">
-            <h3>Editar Evento</h3>
+            <h3>Nuevo Evento</h3>
             <button class="close">
                 <span>+</span>
             </button>
         </div>
-        <form action="">
+        <form method="post">
+
             <div class="form-group">
-                <label for="">Nombre del Evento</label>
-                <input type="text" name="" id="">
+                <label for="add-event">Nombre del Evento</label>
+                <input type="text" name="event" id="add-event">
+                <label class="error" for="add-event"></label>
             </div>
-            <button type="submit">Guardar <img src="{% static 'img/save.svg' %}" alt="Guardar Cambio"></button>
+            <button type="submit">Crear <img src="{% static 'img/save.svg' %}" alt="Guardar Cambio"></button>
         </form>
     </div>
     <div class="bottom-modal session">
@@ -58,6 +46,8 @@
                     class="goto" src="{% static 'img/arrow.svg' %}" alt=""></button>
             <button class="save"><img src="{% static 'img/save_line.svg' %}" alt=""> Guardar repositorio <img
                     class="goto" src="{% static 'img/arrow.svg' %}" alt=""></button>
+            <button class="get"><img src="{% static 'img/plus.svg' %}" alt=""> Nuevo repositorio <img class="goto"
+                    src="{% static 'img/arrow.svg' %}" alt=""></button>
             <button class="get"><img src="{% static 'img/reload.svg' %}" alt=""> Recuperar repositorio <img class="goto"
                     src="{% static 'img/arrow.svg' %}" alt=""></button>
             <button class="delete"><img src="{% static 'img/trash.svg' %}" alt=""> Eliminar repositorio <img
@@ -73,5 +63,19 @@
             <a href="">Más información</a>
             <p class="disclaimer">* Cualquier persona con la que compartas el repositorio puede acceder a tus datos.</p>
         </div>
+    </div>
+    <div class="modal ob_add">
+        <div class="title">
+            <h3>Nuevo Evento</h3>
+            <p>Debes crear un evento para empezar</p>
+        </div>
+        <form method="post">
+            <div class="form-group">
+                <label for="ob_add-event">Nombre del Evento</label>
+                <input type="text" name="event" id="ob_add-event">
+                <label class="error" for="add-event"></label>
+            </div>
+            <button type="submit">Crear <img src="{% static 'img/save.svg' %}" alt="Guardar Cambio"></button>
+        </form>
     </div>
 </div>

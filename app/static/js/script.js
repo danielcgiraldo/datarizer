@@ -142,7 +142,7 @@ function setSessionModal(modal) {
             });
         } else {
             // copy to clipboard
-            navigator.clipboard.writeText(url).then(() => {
+            navigator.clipboard.writeText(text).then(() => {
                 MESSAGE_CONTAINER.querySelector("p").innerHTML = "¡Enlace copiado al portapapeles!";
                 MESSAGE_CONTAINER.style.height = MESSAGE_CONTAINER.scrollHeight + "px";
                 setTimeout(() => {
@@ -159,6 +159,41 @@ function setSessionModal(modal) {
     MODAL_EVENTS.push([modal.querySelector("button.share"), share_handler]);
 }
 
+function setAddModal(modal) {
+    const submit_handler = async (ev) => {
+        ev.preventDefault();
+        const name = ev.target.querySelector("input").value;
+        const label_error = modal.querySelector("label.error");
+        if (name.length > 10) {
+            label_error.innerHTML = "El nombre es demasiado largo";
+            return;
+        } else if (name.length < 3) {
+            label_error.innerHTML = "El nombre es demasiado corto";
+            return;
+        }
+        try {
+            const response = await fetch(`/api/add/${name}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
+            if (response.status === 200) {
+                addEvent(name);
+                removeModal();
+            } else {
+                label_error.innerHTML = "El evento ya existe";
+                return;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    modal.querySelector("form").addEventListener("submit", submit_handler);
+    MODAL_EVENTS.push([modal.querySelector("form"), submit_handler]);
+}
+
 function showModal(ev) {
     if (ev.target.id == "session-handler") {
         MODAL_CONTAINER.classList.add("active");
@@ -169,7 +204,11 @@ function showModal(ev) {
         handleRemoveModal(SESSION_MODAL);
         setSessionModal(SESSION_MODAL);
     } else if (ev.target.classList[1] === "add") {
-        addEvent("Prueba");
+        MODAL_CONTAINER.classList.add("active");
+        const ADD_MODAL = MODAL_CONTAINER.querySelector(".add")
+        ADD_MODAL.classList.add("active");
+        handleRemoveModal(ADD_MODAL);
+        setAddModal(ADD_MODAL);
     } else if (ev.target.classList[1] === "edit") {
         removeEvent();
         CARDS_CONTAINER.classList = "edit"
@@ -178,6 +217,12 @@ function showModal(ev) {
         removeEvent();
         CARDS_CONTAINER.classList = "remove"
         createCancelBtn();
+    } else if (ev.target.classList[1] === "ob_add") {
+        MODAL_CONTAINER.classList.add("active");
+        const ADD_MODAL = MODAL_CONTAINER.querySelector(".ob_add")
+        ADD_MODAL.classList.add("active")
+        handleRemoveModal(ADD_MODAL);
+        setAddModal(ADD_MODAL);
     } else {
         return;
     }
@@ -196,6 +241,8 @@ window.onload = () => {
         EVENTS.forEach(event => {
             addEvent(event)
         });
+    } else {
+        showModal({ target: { classList: [, "ob_add"] } });
     }
 
     // =============== SESSION ===============

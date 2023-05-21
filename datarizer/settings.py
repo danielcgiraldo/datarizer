@@ -128,3 +128,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # https://docs.djangoproject.com/en/4.1/topics/http/sessions/
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+SESSION_COOKIE_AGE = 86400
