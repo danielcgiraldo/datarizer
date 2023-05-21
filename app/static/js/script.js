@@ -45,6 +45,8 @@ const COLORS = [
 
 const CARDS_CONTAINER = document.querySelector("header")
 const MODAL_CONTAINER = document.getElementById("modal-container");
+const MESSAGE_CONTAINER = document.getElementById("message-container");
+const MODAL_EVENTS = []
 
 function addEvent(name) {
     try {
@@ -89,20 +91,93 @@ function createCancelBtn() {
     cancelBtn.addEventListener('click', removeEvent)
 }
 
-function showModal(ev) {
+function removeModal() {
+    MODAL_CONTAINER.classList.remove("active");
+    MODAL_CONTAINER.querySelector(".active").classList.remove("active");
+    MODAL_EVENTS.forEach(event => {
+        try {
+            event[0].removeEventListener("click", event[1]);
+        } catch (error) {
+        }
+    });
+}
 
-    if (ev.target.classList[1] === "add") {
+function handleRemoveModal(modal) {
+    const CLOSE_BTN = modal.querySelector("button.close");
+
+    const close_handler = () => {
+        removeModal();
+    };
+
+    const outside_handler = (ev) => {
+        if (ev.target.id === "modal-container") {
+            removeModal();
+        }
+    };
+
+    MODAL_CONTAINER.addEventListener("click", outside_handler);
+    CLOSE_BTN.addEventListener("click", close_handler);
+    MODAL_EVENTS.push([MODAL_CONTAINER, outside_handler]);
+    MODAL_EVENTS.push([CLOSE_BTN, close_handler]);
+}
+
+function setSessionModal(modal) {
+    const share_handler = () => {
+        const session = modal.querySelector("h3").innerHTML;
+        const session_id = session.slice(1, session.length);
+
+        const url = `https://datarizer.vercel.app/session/${session_id}`;
+        const text = `¡Hola! Te invito a ver mi sesión de trabajo en Datarizer: ${url}`;
+
+        if (navigator.share) {
+            // share using navigator
+            navigator.share({
+                title: "Datarizer",
+                text,
+                url
+            }).then(() => {
+                console.log("Compartido");
+            }).catch((error) => {
+                console.log(error);
+            });
+        } else {
+            // copy to clipboard
+            navigator.clipboard.writeText(url).then(() => {
+                MESSAGE_CONTAINER.querySelector("p").innerHTML = "¡Enlace copiado al portapapeles!";
+                MESSAGE_CONTAINER.style.height = MESSAGE_CONTAINER.scrollHeight + "px";
+                setTimeout(() => {
+                    MESSAGE_CONTAINER.style.height = 0;
+                }, 4000);
+            }).catch((error) => {
+                console.log(error);
+            }
+            );
+        }
+        removeModal();
+    };
+    modal.querySelector("button.share").addEventListener("click", share_handler);
+    MODAL_EVENTS.push([modal.querySelector("button.share"), share_handler]);
+}
+
+function showModal(ev) {
+    if (ev.target.id == "session-handler") {
+        MODAL_CONTAINER.classList.add("active");
+        const SESSION_MODAL = MODAL_CONTAINER.querySelector(".session")
+        setTimeout(() => {
+            SESSION_MODAL.classList.add("active");
+        }, 100);
+        handleRemoveModal(SESSION_MODAL);
+        setSessionModal(SESSION_MODAL);
+    } else if (ev.target.classList[1] === "add") {
         addEvent("Prueba");
     } else if (ev.target.classList[1] === "edit") {
         removeEvent();
         CARDS_CONTAINER.classList = "edit"
         createCancelBtn();
-
     } else if (ev.target.classList[1] === "remove") {
         removeEvent();
         CARDS_CONTAINER.classList = "remove"
         createCancelBtn();
-
     } else {
         return;
     }
@@ -124,12 +199,7 @@ window.onload = () => {
     }
 
     // =============== SESSION ===============
-    document.getElementById("session-handler").addEventListener("click", () => {
-        MODAL_CONTAINER.classList.toggle("active");
-        setTimeout(() => {
-            MODAL_CONTAINER.querySelector(".session").classList.toggle("active");
-        }, 100);
-    });
+    document.getElementById("session-handler").addEventListener("click", showModal);
 
     // =============== ACTIONS ===============
     const actionsContainer = document.getElementById('actions');

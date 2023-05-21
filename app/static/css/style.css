@@ -35,9 +35,31 @@ body {
     background-color: #121212;
 }
 
+button {
+    cursor: pointer;
+}
+
 button img {
     user-select: none;
     pointer-events: none;
+}
+
+div#message-container {
+    width: 100%;
+    padding: 0 20px;
+    background-color: white;
+    height: 0;
+    transition: all 0.3s ease-out;
+}
+
+div#message-container p {
+    width: 100%;
+    text-align: center;
+    color: #121212;
+    font-size: 14px;
+    max-width: 600px;
+    font-weight: 500;
+    padding: 10px 0;
 }
 
 div.container {
@@ -71,7 +93,6 @@ div#actions button#handler-btn {
     height: 50px;
     border-radius: 50%;
     background-color: #03dac6;
-    cursor: pointer;
 }
 
 div#actions button#handler-btn img {
@@ -127,7 +148,7 @@ div#actions div.relative div.actions button.action {
     font-size: 14px;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
+
     font-weight: 600;
     color: #121212;
 }
@@ -307,7 +328,6 @@ header button.card {
     justify-content: space-between;
     padding: 10px;
     background-color: var(--bg-color);
-    cursor: pointer;
 }
 
 header button.card div {
@@ -391,7 +411,6 @@ form button {
     justify-content: space-between;
     margin-top: 20px;
     align-items: center;
-    cursor: pointer;
 }
 
 main form button img {
@@ -548,7 +567,6 @@ div#modal-container div.bottom-modal {
     transition: all 0.3s ease-out;
 }
 
-
 div#modal-container div.bottom-modal.active {
     bottom: 0;
 }
@@ -563,7 +581,6 @@ div#modal-container div.bottom-modal div.title {
     padding: 0 20px;
     margin-top: 5px;
 }
-
 
 div#modal-container div.bottom-modal div.title h3 {
     text-align: center;
