@@ -640,10 +640,10 @@ div#modal-container div.bottom-modal div.politics p strong {
 }
 
 div#modal-container div.bottom-modal div.politics p.disclaimer {
-    font-size: 14px;
+    font-size: 12px;
     opacity: 0.5;
-    line-height: 15px;
-    margin-bottom: 0;
+    line-height: 110%;
+    margin-bottom: 10px;
     margin-top: 20px;
     display: block;
 }
