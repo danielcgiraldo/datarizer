@@ -5,11 +5,10 @@ from django.template import loader
 from django.http import HttpResponse
 
 
-import secrets
 from app.utils import data_collection, session_collection
 
 
-def index(request):
+def show_view(request):
     data = []
     events = []
     flag = False
@@ -38,3 +37,12 @@ def index(request):
     print(data)
     dt = datetime.datetime.now().strftime("%Y-%m-%d")
     return HttpResponse(loader.get_template('default.html').render({"dt": dt, "events": events, "data": data, "session": request.session.get('session')}))
+
+
+def session(request, session):
+    request.session['session'] = session
+    show_view(request)
+
+
+def index(request):
+    show_view(request)
