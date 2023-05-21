@@ -3,6 +3,7 @@ import datetime
 from bson import ObjectId
 from django.template import loader
 from django.http import HttpResponse
+from django.shortcuts import redirect
 
 
 from app.utils import data_collection, session_collection
@@ -56,6 +57,11 @@ def session(request, session):
 def index(request):
     return show_view(request)
 
+def new(request):
+    # remove session
+    request.session.flush()
+    # redirect to home
+    return redirect('/')
 
 def handler404(request, *args, **argv):
     return HttpResponse(loader.get_template('404.html').render(), status=404)

@@ -160,6 +160,7 @@ function setSessionModal(modal) {
 }
 
 function setAddModal(modal) {
+    // =============== ADD EVENT ===============
     const submit_handler = async (ev) => {
         ev.preventDefault();
         const name = ev.target.querySelector("input").value;
@@ -192,6 +193,13 @@ function setAddModal(modal) {
     };
     modal.querySelector("form").addEventListener("submit", submit_handler);
     MODAL_EVENTS.push([modal.querySelector("form"), submit_handler]);
+
+    // =============== SAVE SESSION ===============
+    const save_handler = async (ev) => {
+        
+    };
+    modal.querySelector("button.save").addEventListener("click", save_handler);
+    MODAL_EVENTS.push([modal.querySelector("button.save"), save_handler]);
 }
 
 function showModal(ev) {
@@ -221,7 +229,6 @@ function showModal(ev) {
         MODAL_CONTAINER.classList.add("active");
         const ADD_MODAL = MODAL_CONTAINER.querySelector(".ob_add")
         ADD_MODAL.classList.add("active")
-        handleRemoveModal(ADD_MODAL);
         setAddModal(ADD_MODAL);
     } else {
         return;
@@ -258,5 +265,14 @@ window.onload = () => {
     actionsContainer.querySelector("button.action.edit").addEventListener("click", showModal);
     actionsContainer.querySelector("button.action.remove").addEventListener("click", showModal);
 
+    // if url contains "/session/" then show save app modal
+    if (window.location.pathname.includes("/session/")) {
+        if (
+            (("standalone" in window.navigator) && !window.navigator.standalone) // ios
+            ||
+            (!window.matchMedia(' (display-mode: standalone)').matches)) // android
+            addToHomescreen();
+        else console.log("App installed");
+    }
 
 };
