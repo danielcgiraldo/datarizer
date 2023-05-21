@@ -561,7 +561,7 @@ div#modal-container div.bottom-modal div.title {
     justify-content: center;
     margin-bottom: 20px;
     padding: 0 20px;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 
@@ -603,6 +603,7 @@ div#modal-container div.bottom-modal div.links button {
 div#modal-container div.bottom-modal div.links button img {
     margin-right: 25px;
     height: 14px;
+    margin-top: -2px;
 }
 
 div#modal-container div.bottom-modal div.links button img.goto {

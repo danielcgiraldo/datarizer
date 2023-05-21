@@ -27,7 +27,7 @@ def index(request):
                     ("date", -1)]).limit(5))[0].get('data')
     if not flag:
         # Create a new user in the database
-        new_user = session_collection.insert_one({"events": []})
+        new_user = session_collection.insert_one({"events": [], "created_at": datetime.datetime.now(), "delete_at": datetime.datetime.now() + datetime.timedelta(days=1)})
 
         # Create new data space for the user
         data_collection.insert_one({"_id": new_user.inserted_id, "data": []})
