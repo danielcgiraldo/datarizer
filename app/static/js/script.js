@@ -44,6 +44,7 @@ const COLORS = [
 ];
 
 const CARDS_CONTAINER = document.querySelector("header")
+const MODAL_CONTAINER = document.getElementById("modal-container");
 
 function addEvent(name) {
     try {
@@ -89,7 +90,6 @@ function createCancelBtn() {
 }
 
 function showModal(ev) {
-    const modalContainer = document.getElementById("modal-container");
 
     if (ev.target.classList[1] === "add") {
         addEvent("Prueba");
@@ -122,6 +122,14 @@ window.onload = () => {
             addEvent(event)
         });
     }
+
+    // =============== SESSION ===============
+    document.getElementById("session-handler").addEventListener("click", () => {
+        MODAL_CONTAINER.classList.toggle("active");
+        setTimeout(() => {
+            MODAL_CONTAINER.querySelector(".session").classList.toggle("active");
+        }, 100);
+    });
 
     // =============== ACTIONS ===============
     const actionsContainer = document.getElementById('actions');

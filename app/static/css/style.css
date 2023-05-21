@@ -110,7 +110,8 @@ div#actions div.relative div.actions {
     border-radius: 5px;
     display: none;
     overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 div#actions.active div.relative div.actions {
@@ -129,7 +130,6 @@ div#actions div.relative div.actions button.action {
     cursor: pointer;
     font-weight: 600;
     color: #121212;
-    
 }
 
 div#actions div.relative div.actions button.action:hover {
@@ -161,12 +161,13 @@ nav img.logo {
     height: 100%;
 }
 
-nav a {
+nav button {
     height: 80%;
     width: auto;
+    background-color: transparent;
 }
 
-nav a img {
+nav button img {
     height: 100%;
     width: auto;
 }
@@ -185,7 +186,7 @@ header button.cancel {
     display: flex;
     justify-content: center;
     padding: 15px 0;
-    background-color: #B00020;
+    background-color: #b00020;
     color: white;
     font-weight: 600;
     font-size: 16px;
@@ -493,7 +494,8 @@ div#modal-container div.modal div.title h3 {
     color: rgba(255, 255, 255, 0.5);
 }
 
-div#modal-container div.modal div.title button {
+div#modal-container div.modal div.title button,
+div#modal-container div.bottom-modal div.title button {
     height: 20px;
     display: flex;
     align-items: center;
@@ -501,7 +503,8 @@ div#modal-container div.modal div.title button {
     background-color: #121212;
 }
 
-div#modal-container div.modal div.title button span {
+div#modal-container div.modal div.title button span,
+div#modal-container div.bottom-modal div.title button span {
     color: rgba(255, 255, 255, 0.5);
     transform: rotate(45deg);
     font-size: 18px;
@@ -531,4 +534,136 @@ div#modal-container div.modal form button img {
     height: 17px;
     width: auto;
     margin-top: -3px;
+}
+
+div#modal-container div.bottom-modal {
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    padding: 10px 0;
+    bottom: -100vh;
+    transition: all 0.3s ease-out;
+}
+
+
+div#modal-container div.bottom-modal.active {
+    bottom: 0;
+}
+
+div#modal-container div.bottom-modal div.title {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+
+div#modal-container div.bottom-modal div.title h3 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    color: #121212;
+    padding: 10px 0;
+}
+
+div#modal-container div.bottom-modal div.title button {
+    position: absolute;
+    right: 20px;
+    background-color: transparent;
+}
+
+div#modal-container div.bottom-modal div.title button img {
+    height: 10px;
+}
+
+div#modal-container div.bottom-modal div.links {
+    width: 100%;
+}
+
+div#modal-container div.bottom-modal div.links button {
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    background: transparent;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #121212;
+    margin-bottom: 5px;
+}
+
+div#modal-container div.bottom-modal div.links button img {
+    margin-right: 25px;
+    height: 14px;
+}
+
+div#modal-container div.bottom-modal div.links button img.goto {
+    position: absolute;
+    right: 20px;
+    margin-right: 0;
+    height: 10px;
+}
+
+div#modal-container div.bottom-modal div.politics {
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
+    padding: 0 20px;
+    margin-top: 15px;
+}
+
+div#modal-container div.bottom-modal div.politics h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #121212;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+div#modal-container div.bottom-modal div.politics p {
+    font-size: 16px;
+    color: #121212;
+    margin-bottom: 10px;
+    line-height: 115%;
+    opacity: 0.8;
+}
+
+div#modal-container div.bottom-modal div.politics p strong {
+    color: #b00020;
+}
+
+div#modal-container div.bottom-modal div.politics p.disclaimer {
+    font-size: 14px;
+    opacity: 0.5;
+    line-height: 15px;
+    margin-bottom: 0;
+    margin-top: 20px;
+    display: block;
+}
+
+div#modal-container div.bottom-modal div.politics a {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4rem;
+    background-color: #121212;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+div#modal-container div.bottom-modal div.politics a:last-of-type {
+    border: 1px solid rgba(18, 18, 18, 0.2);
+    color: #121212;
+    background-color: transparent;
+    margin-top: 10px;
 }
