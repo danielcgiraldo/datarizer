@@ -592,8 +592,9 @@ div#modal-container div.bottom-modal div.title h3 {
 
 div#modal-container div.bottom-modal div.title button {
     position: absolute;
-    right: 20px;
+    right: 10px;
     background-color: transparent;
+    padding: 20px 10px;
 }
 
 div#modal-container div.bottom-modal div.title button img {
