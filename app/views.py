@@ -40,9 +40,22 @@ def show_view(request):
 
 
 def session(request, session):
-    request.session['session'] = session
-    show_view(request)
+    try:
+        ObjectId(session)
+    except:
+        return HttpResponse(loader.get_template('404.html').render())
+    user = session_collection.find_one(
+        {"_id": ObjectId(session)})
+    if user:
+        request.session['session'] = session
+        return show_view(request)
+    else:
+        return HttpResponse(loader.get_template('404.html').render())
 
 
 def index(request):
-    show_view(request)
+    return show_view(request)
+
+
+def handler404(request, *args, **argv):
+    return HttpResponse(loader.get_template('404.html').render(), status=404)

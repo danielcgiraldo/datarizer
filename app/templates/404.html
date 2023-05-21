@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datarizer | Página no encontrada</title>
+
+    <meta name="description"
+        content="Datarizer: La herramienta de registro de eventos que optimiza tu proceso de simulación. Olvídate de tomar datos manualmente, cronometrar y llevar un formato en mano. Con Datarizer, simplemente presiona un botón para guardar registro de cada evento de manera rápida y precisa">
+    <meta name="keywords"
+        content="registro de eventos, herramienta de simulación, recopilación de datos, ahorro de tiempo, eficiencia en el trabajo, productividad, datarizer">
+    <meta name="author" content="Daniel Castillo Giraldo">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+    <!-- Customs -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- analytics -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8GVFCPQ6VW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-8GVFCPQ6VW');
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container not-found">
+        <div class="content">
+            <div class="info">
+                <a href="/"><img class="logo" src="{% static 'img/logo.svg' %}"
+                        alt="Datarizer | Recolecta tus datos"></a>
+                <h1>Página no encontrada</h1>
+                <p>Lo sentimos, parece que no hemos podido encontrar la página que estás buscando.</p>
+                <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf6ZuLCjMUqLEkdLyyhA_HkgOD6gDPIng9Bc2ZIFlbzUasd8g/viewform?usp=sf_link"
+                    target="_blank" rel="noopener noreferrer">Recuperar mis datos</a>
+                <a class="btn" href="/">Ir a la página principal</a>
+            </div>
+            <footer>
+                <p>© 2023 <a href="https://github.com/danielcgiraldo" target="_blank" rel="noopener noreferrer">Daniel
+                        Castillo</a>. MIT License.</p>
+            </footer>
+        </div>
+    </div>
+
+</body>
+
+</html>
