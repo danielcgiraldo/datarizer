@@ -472,7 +472,13 @@ div#modal-container {
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px); /* Standard syntax */
+    backdrop-filter: blur(5px); /* Chrome, Safari, and Opera */
+    -webkit-backdrop-filter: blur(5px); /* Chrome and Safari */
+    -moz-backdrop-filter: blur(5px); /* Firefox */
+    -ms-backdrop-filter: blur(5px); /* Edge */
+    -o-backdrop-filter: blur(5px); /* Opera */
+    background-color: rgba(0, 0, 0, 0.5); /* Fallback color */
     z-index: 999;
     display: none;
     justify-content: center;
