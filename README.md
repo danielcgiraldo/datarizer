@@ -15,13 +15,15 @@
 
 ## Introducción
 
-Datarizer es una herramienta para registrar datos manualmente y exportarlos a un archivo CSV. Es ideal para registrar datos de experimentos, eventos, etc.
+**Datarizer** es una herramienta versátil diseñada para facilitar el registro y la gestión de datos de manera eficiente. Con Datarizer, puedes registrar datos manualmente y exportarlos a un archivo CSV para su posterior análisis y procesamiento. Esta herramienta es especialmente útil para registrar datos de experimentos, eventos y cualquier tipo de información que requiera un seguimiento organizado.
 
-- Registro de eventos
-- Registro de datos
-- Exportación de datos
-- Sincronización de datos
-- Datos colaborativos
+Datarizer ofrece una amplia gama de **características** que te ayudarán en el manejo efectivo de tus datos:
+
+- **Registro de eventos**: Podrás registrar todos los eventos relevantes en la aplicación. Simplemente ingresa el nombre del evento y crea un registro para mantener un seguimiento detallado.
+- **Registro de datos**: Una vez que hayas creado un evento, podrás agregar registros de datos relacionados con ese evento. Estos registros capturan la fecha y hora actual, así como los detalles específicos del evento seleccionado, lo que te permite tener una visión completa y precisa de tus datos.
+- **Exportación de datos**: Datarizer te permite exportar tus datos en formato CSV. Puedes seleccionar los filtros que desees aplicar a tus datos y luego exportarlos con un solo clic. Esto te brinda la flexibilidad de utilizar tus datos en otras herramientas o compartirlos con colegas para su análisis adicional.
+- **Sincronización de datos**: La sesión de Datarizer está diseñada para mantener tus datos seguros y accesibles en todo momento. Puedes ajustar la configuración de sincronización para guardar tus datos de forma periódica en la base de datos. Además, puedes acceder a tus datos desde cualquier dispositivo con solo iniciar sesión en tu cuenta.
+- **Datos colaborativos**: Datarizer facilita el trabajo colaborativo al permitirte compartir tu repositorio con otros usuarios. Puedes generar un enlace único para compartir y colaborar en tiempo real con tus colegas. No es necesario compartir correos electrónicos ni contraseñas, lo que simplifica el proceso y garantiza la privacidad de tus datos.
 
 ## Uso
 
