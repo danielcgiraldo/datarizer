@@ -64,7 +64,7 @@ En los ajustes de tu sesión, puedes encontrar otras opciones interesantes como 
 
 ## Problemas y Solicitudes de Funcionalidades
 
-Por favor, informa problemas y solicita funcionalidades en [GitHub Issues].
+Por favor, informa problemas y solicita funcionalidades en [GitHub Issues](https://github.com/danielcgiraldo/datarizer/issues).
 
 ## Contribución
 
