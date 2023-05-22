@@ -5,7 +5,7 @@
     <img src="https://badgen.net/badge/icon/Powered%20by%20Vercel?icon=zeit&label&color=black&labelColor=black">
   </a>
   <br/>
-  <a aria-label="Release" href="https://github.com/danielcgiraldo/datarizer/blob/main/LICENSE">
+  <a aria-label="Release" href="https://github.com/danielcgiraldo/datarizer/releases">
     <img alt="Release" src="https://badgen.net/github/release/danielcgiraldo/datarizer">
   </a>
   <a aria-label="License" href="https://github.com/danielcgiraldo/datarizer/blob/main/LICENSE">
