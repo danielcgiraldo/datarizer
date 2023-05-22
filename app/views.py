@@ -23,8 +23,8 @@ def show_view(request):
             events = user.get('events')
             if events:
                 # Get last 4 rows of data for the events
-                data = (data_collection.find({"_id": ObjectId(request.session.get('session'))}).sort([
-                    ("date", -1)]).limit(5))[0].get('data')
+                data = data_collection.find_one({"_id": ObjectId(request.session.get('session'))}, {"data": {"$slice": -5}})
+                data = data.get('data', [])
     if not flag:
         # Create a new user in the database
         new_user = session_collection.insert_one({"events": [], "created_at": datetime.datetime.now(

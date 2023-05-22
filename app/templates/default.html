@@ -105,21 +105,20 @@
                         {% endfor %}
                     </table>
                     <p>*Para ver más eventos, exporta la base de datos</p>
-                    <form class="export" method="post">
+                    <form class="export" method="post" action="api/export">
                         <div class="row">
                             <div class="form-group">
-                                <label for="date">Fecha Inicio</label>
-                                <input type="date" name="date" id="date" value="{{dt}}">
+                                <label for="export-st_dt">Fecha Inicio</label>
+                                <input type="date" name="st_dt" id="export-st_dt" value="{{dt}}">
                             </div>
                             <div class="form-group">
-                                <label for="date">Ficha Fin</label>
-                                <input type="date" name="date" id="date" value="{{dt}}">
+                                <label for="export-end_dt">Ficha Fin</label>
+                                <input type="date" name="end_dt" id="export-end_dt" value="{{dt}}">
                             </div>
                             <div class="form-group">
-                                <label for="date">Evento</label>
-                                <select name="" id="">
+                                <label for="export-event">Evento</label>
+                                <select name="event" id="export-event" required>
                                     <option value="all" selected>Todos</option>
-                                    <option value="">Otros</option>
                                 </select>
                             </div>
                         </div>
@@ -145,6 +144,8 @@
     <!-- Scripts -->
     <script>
         const EVENTS = JSON.parse('{{events}}'.replace(/&#x27;/g, '"'))
+        let DATA_ROWS = parseInt('{{ data|length }}');
+
     </script>
     <script src="{% static 'js/script.js' %}"></script>
 

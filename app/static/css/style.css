@@ -544,6 +544,7 @@ div#modal-container div.bottom-modal div.title button {
     align-items: center;
     justify-content: center;
     background-color: #121212;
+    
 }
 
 div#modal-container div.modal div.title button span,
@@ -588,6 +589,7 @@ div#modal-container div.bottom-modal {
     padding: 10px 0;
     bottom: -100vh;
     transition: all 0.3s ease-out;
+    max-width: 1200px;
 }
 
 div#modal-container div.bottom-modal.active {
@@ -797,3 +799,31 @@ div.container.not-found div.info a.btn:last-of-type {
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
 }
+
+/* responsive 1200px */
+
+@media only screen and (min-width: 1200px) {
+    header div.card h1 {
+        font-size: 200px;
+        margin-right: 20px;
+    }
+    header div.card span {
+        font-size: 100px;
+    }
+    div.row {
+        justify-content: flex-start;
+    }
+    header div.card p {
+        font-size: 50px;
+        margin-bottom: -20px;
+    }
+    header button.card {
+        height: 200px;
+    }
+    header button.card h2 {
+        font-size: 50px;
+    }
+    header button.card div.top img {
+        height: 50px;
+    }
+  }

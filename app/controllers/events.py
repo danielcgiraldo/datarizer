@@ -1,6 +1,4 @@
-
-
-import datetime
+from datetime import datetime
 from bson import ObjectId
 from django.http import JsonResponse
 from app.utils import data_collection, session_collection
@@ -8,6 +6,8 @@ from app.utils import data_collection, session_collection
 
 def create_event(request, event):
     try:
+        if event == "all":
+            return JsonResponse({"status": "error", "message": "Event name not allowed"}, status=400)
         # check if there is an event with the same name
         if session_collection.find_one({"_id": ObjectId(request.session.get('session')), "events": event}):
             return JsonResponse({"status": "error", "message": "Event already exists"}, status=400)
@@ -36,7 +36,7 @@ def remove_event(request, event):
         return JsonResponse({"status": "error", "message": "Request failed"}, status=500)
 
 
-def modify_event(request, event, new):
+def edit_event(request, event, new):
     try:
         # check if there is an event with the same name
         if not session_collection.find_one({"_id": ObjectId(request.session.get('session')), "events": event}):
@@ -51,5 +51,24 @@ def modify_event(request, event, new):
         data_collection.update_many(
             {"_id": request.session.get('session'), "data": {"$elemMatch": {"event": event}}}, {"$set": {"data.$.event": new}})
         return JsonResponse({"status": "success", "message": "Event modified successfully"}, status=200)
+    except:
+        return JsonResponse({"status": "error", "message": "Request failed"}, status=500)
+
+
+def log_event(request, event):
+    try:
+        session_id = request.session.get('session')
+
+        # Check if there is an event with the same name
+        if not session_collection.find_one({"_id": ObjectId(session_id), "events": event}):
+            return JsonResponse({"status": "error", "message": "Event already exists"}, status=400)
+
+        date = datetime.now()
+
+        # Add event log to data
+        data_collection.update_one({"_id": ObjectId(session_id)}, {
+            "$push": {"data": {"event": event, "date": date}}})
+
+        return JsonResponse({"status": "success", "message": "Event logged successfully", "date": date.strftime("%d/%m/%Y - %H:%M:%S")}, status=200)
     except:
         return JsonResponse({"status": "error", "message": "Request failed"}, status=500)

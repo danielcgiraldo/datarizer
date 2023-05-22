@@ -71,6 +71,7 @@ function addEvent(name) {
             </div>
         `;
         CARDS_CONTAINER.appendChild(card);
+        document.querySelector("form.export select").innerHTML += `<option value="${name}">${name}</option>`;
         card_i++;
     } catch (error) {
 
@@ -254,14 +255,58 @@ function resetCardEvents() {
     CARD_EVENTS = [];
 }
 
-function defaultCardsEvents() {
+function defaultCardsEvents(card = null) {
     // The default event for the cards
     const cards = CARDS_CONTAINER.querySelectorAll("button.card");
-    const defaultEvent = (ev) => {
+    const defaultEvent = async (ev) => {
         const card = ev.target.closest("button.card");
         const name = card.querySelector("h2").innerHTML;
+        try {
+            const response = await fetch(`/api/log/${name}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
+            if (response.status === 200) {
+                const data = await response.json();
+                const table = document.querySelector("table");
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${data.date}</td>
+                    <td>${name}</td>
+                `;
+                if (DATA_ROWS > 4) {
+                    table.querySelector("tbody").lastElementChild.remove();
+                }
+                table.querySelector("tbody th").parentElement.insertAdjacentElement("afterend", row);
+            } else {
+                MESSAGE_CONTAINER.querySelector("p").innerHTML = "No se ha podido registrar el evento";
+                MESSAGE_CONTAINER.style.height = MESSAGE_CONTAINER.scrollHeight + "px";
+                setTimeout(() => {
+                    MESSAGE_CONTAINER.style.height = 0;
+                }, 4000);
+                return;
+            }
+        } catch (error) {
+            MESSAGE_CONTAINER.querySelector("p").innerHTML = "No se ha podido registrar el evento";
+            MESSAGE_CONTAINER.style.height = MESSAGE_CONTAINER.scrollHeight + "px";
+            setTimeout(() => {
+                MESSAGE_CONTAINER.style.height = 0;
+            }, 4000);
+            return;
+        }
     };
-    //TODO
+    if (card) {
+        card.addEventListener("click", defaultEvent);
+        CARD_EVENTS.push([card, defaultEvent]);
+        return;
+    }
+    cards.forEach(card => {
+        card.addEventListener("click", defaultEvent);
+        CARD_EVENTS.push([card, defaultEvent]);
+    });
 }
 
 function removeSetup() {
@@ -334,7 +379,7 @@ function editSetup() {
         try {
             const last = ev.target.querySelector("input[type=hidden]").value;
             const name = ev.target.querySelector("input[type=text]").value;
-            const response = await fetch(`/api/modify/${last}/${name}`, {
+            const response = await fetch(`/api/edit/${last}/${name}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -431,6 +476,7 @@ window.onload = () => {
         EVENTS.forEach(event => {
             addEvent(event)
         });
+        defaultCardsEvents();
     } else {
         showModal({ target: { classList: [, "ob_add"] } });
     }
