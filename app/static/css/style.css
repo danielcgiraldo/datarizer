@@ -713,6 +713,52 @@ div.container.not-found div.info a.btn:last-of-type {
     margin-top: 10px;
 }
 
+div#modal-container div.modal.confirm div.modal-content {
+    width: 100%;
+    padding: 0 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+div#modal-container div.modal.confirm div.modal-content p {
+    font-weight: 400;
+    font-size: 16px;
+    color: white;
+}
+
+div#modal-container div.modal.confirm div.modal-content div.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+div#modal-container div.modal.confirm div.modal-content div.buttons button {
+    width: 48%;
+    padding: 10px 0;
+    border-radius: 10px;
+    background-color: white;
+    color: #121212;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+div#modal-container div.modal span {
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 110%;
+}
+
+div#modal-container div.modal span strong {
+    color: #b00020;
+}
+
+div#modal-container div.modal.edit span strong {
+    color: #03dac6;
+}
+
 /* ================= 404 ================= */
 
 div.container.not-found div.info {
@@ -732,7 +778,6 @@ div.container.not-found div.info h1 {
     line-height: 110%;
     max-width: 70%;
     margin-bottom: 30px;
-   
 }
 
 div.container.not-found div.info p {

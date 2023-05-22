@@ -46,7 +46,8 @@ const COLORS = [
 const CARDS_CONTAINER = document.querySelector("header")
 const MODAL_CONTAINER = document.getElementById("modal-container");
 const MESSAGE_CONTAINER = document.getElementById("message-container");
-const MODAL_EVENTS = []
+let MODAL_EVENTS = []
+let CARD_EVENTS = []
 
 function addEvent(name) {
     try {
@@ -78,6 +79,7 @@ function addEvent(name) {
 
 
 function removeEvent() {
+    resetCardEvents();
     const event = CARDS_CONTAINER.classList[0]
     if (event === "edit" || event === "remove") CARDS_CONTAINER.querySelector(".cancel").remove();
     CARDS_CONTAINER.classList = "";
@@ -91,15 +93,26 @@ function createCancelBtn() {
     cancelBtn.addEventListener('click', removeEvent)
 }
 
+function removeModalandEvent() {
+    removeModal();
+    removeEvent();
+    defaultCardsEvents();
+}
+
 function removeModal() {
-    MODAL_CONTAINER.classList.remove("active");
-    MODAL_CONTAINER.querySelector(".active").classList.remove("active");
-    MODAL_EVENTS.forEach(event => {
-        try {
-            event[0].removeEventListener("click", event[1]);
-        } catch (error) {
-        }
-    });
+    try {
+        MODAL_CONTAINER.classList.remove("active");
+        MODAL_CONTAINER.querySelector(".active").classList.remove("active");
+        MODAL_EVENTS.forEach(event => {
+            try {
+                event[0].removeEventListener("click", event[1]);
+            } catch (error) {
+            }
+        });
+        MODAL_EVENTS = [];
+    } catch (error) {
+        console.log("no modal displayed")
+    }
 }
 
 function handleRemoveModal(modal) {
@@ -112,6 +125,26 @@ function handleRemoveModal(modal) {
     const outside_handler = (ev) => {
         if (ev.target.id === "modal-container") {
             removeModal();
+        }
+    };
+
+    MODAL_CONTAINER.addEventListener("click", outside_handler);
+    CLOSE_BTN.addEventListener("click", close_handler);
+    MODAL_EVENTS.push([MODAL_CONTAINER, outside_handler]);
+    MODAL_EVENTS.push([CLOSE_BTN, close_handler]);
+}
+
+
+function handleRemoveModalandEvents(modal) {
+    const CLOSE_BTN = modal.querySelector("button.close");
+
+    const close_handler = () => {
+        removeModalandEvent();
+    };
+
+    const outside_handler = (ev) => {
+        if (ev.target.id === "modal-container") {
+            removeModalandEvent();
         }
     };
 
@@ -157,6 +190,20 @@ function setSessionModal(modal) {
     };
     modal.querySelector("button.share").addEventListener("click", share_handler);
     MODAL_EVENTS.push([modal.querySelector("button.share"), share_handler]);
+
+    // =============== SAVE SESSION ===============
+    const save_handler = async (ev) => {
+
+    };
+    modal.querySelector("button.save").addEventListener("click", save_handler);
+    MODAL_EVENTS.push([modal.querySelector("button.save"), save_handler]);
+
+    // =============== NEW REPO ===============
+    const new_repo = () => {
+        window.location.href = "new/";
+    };
+    modal.querySelector("button.new").addEventListener("click", new_repo);
+    MODAL_EVENTS.push([modal.querySelector("button.new"), new_repo]);
 }
 
 function setAddModal(modal) {
@@ -194,12 +241,142 @@ function setAddModal(modal) {
     modal.querySelector("form").addEventListener("submit", submit_handler);
     MODAL_EVENTS.push([modal.querySelector("form"), submit_handler]);
 
-    // =============== SAVE SESSION ===============
-    const save_handler = async (ev) => {
-        
+
+}
+
+function resetCardEvents() {
+    CARD_EVENTS.forEach(event => {
+        try {
+            event[0].removeEventListener("click", event[1]);
+        } catch (error) {
+        }
+    });
+    CARD_EVENTS = [];
+}
+
+function defaultCardsEvents() {
+    // The default event for the cards
+    const cards = CARDS_CONTAINER.querySelectorAll("button.card");
+    const defaultEvent = (ev) => {
+        const card = ev.target.closest("button.card");
+        const name = card.querySelector("h2").innerHTML;
     };
-    modal.querySelector("button.save").addEventListener("click", save_handler);
-    MODAL_EVENTS.push([modal.querySelector("button.save"), save_handler]);
+    //TODO
+}
+
+function removeSetup() {
+    CARDS_CONTAINER.classList = "remove"
+    const cards = CARDS_CONTAINER.querySelectorAll("button.card");
+    // remove event on confirm
+    const removeEventHandler = async (card) => {
+        const name = card.querySelector("h2").innerHTML;
+        try {
+            const response = await fetch(`/api/remove/${name}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
+            if (response.status === 200) {
+                // remove card from DOM
+                card.remove();
+                // remove delete event from cards
+                removeEvent();
+                // reset cards events
+                defaultCardsEvents();
+                // reduce card index
+                card_i--;
+            } else {
+                return;
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            removeModal();
+            if (card_i === 0) {
+                showModal({ target: { classList: [, "ob_add"] } });
+            }
+        }
+    };
+    const removeEventConfirm = (ev) => {
+        const card = ev.target.closest("button.card");
+        const name = card.querySelector("h2").innerHTML;
+        // show confirm modal
+        const modal = MODAL_CONTAINER.querySelector("div.modal.confirm")
+        modal.querySelector("p").innerHTML = `¿Estás seguro de que quieres eliminar <strong>${name}</strong>?`;
+        modal.classList.add("active");
+        MODAL_CONTAINER.classList.add("active");
+        MODAL_EVENTS.push([modal, removeEventConfirm]);
+        // set confirm event
+        modal.querySelector("button.delete").addEventListener("click", () => { removeEventHandler(card) });
+        MODAL_EVENTS.push([modal.querySelector("button.delete"), () => { removeEventHandler(card) }]);
+        // set cancel event
+        modal.querySelector("button.cancel").addEventListener("click", removeModalandEvent);
+        MODAL_EVENTS.push([modal.querySelector("button.cancel"), removeModalandEvent]);
+        // set close modal event
+        handleRemoveModalandEvents(modal);
+    };
+
+    cards.forEach(card => {
+        card.addEventListener("click", removeEventConfirm);
+        CARD_EVENTS.push([card, removeEventConfirm]);
+    });
+}
+
+function editSetup() {
+    CARDS_CONTAINER.classList = "edit"
+    const cards = CARDS_CONTAINER.querySelectorAll("button.card");
+    // edit event on confirm
+    const editEventHandler = async (ev, card) => {
+        ev.preventDefault();
+
+        try {
+            const last = ev.target.querySelector("input[type=hidden]").value;
+            const name = ev.target.querySelector("input[type=text]").value;
+            const response = await fetch(`/api/modify/${last}/${name}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
+            if (response.status === 200) {
+                // remove card from DOM
+                card.querySelector("h2").innerHTML = name;
+                // remove edit event from cards
+                removeEvent();
+                // reset cards events
+                defaultCardsEvents();
+
+                // remove modal
+                removeModal();
+            } else {
+                ev.target.querySelector("label.error").innerHTML = "El evento ya existe";
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const editEventConfirm = (ev) => {
+        const card = ev.target.closest("button.card");
+        const name = card.querySelector("h2").innerHTML;
+        // show confirm modal
+        const modal = MODAL_CONTAINER.querySelector("div.modal.edit")
+        modal.classList.add("active");
+        MODAL_CONTAINER.classList.add("active");
+        // set confirm event
+        modal.querySelector("form input[type=hidden]").value = name;
+        modal.querySelector("form").addEventListener("submit", (ev) => { editEventHandler(ev, card) });
+        MODAL_EVENTS.push([modal.querySelector("form"), (ev) => { editEventHandler(ev, card) }]);
+        // set close modal event
+        handleRemoveModalandEvents(modal);
+    };
+
+    cards.forEach(card => {
+        card.addEventListener("click", editEventConfirm);
+        CARD_EVENTS.push([card, editEventConfirm]);
+    });
 }
 
 function showModal(ev) {
@@ -218,12 +395,18 @@ function showModal(ev) {
         handleRemoveModal(ADD_MODAL);
         setAddModal(ADD_MODAL);
     } else if (ev.target.classList[1] === "edit") {
+        // reset cards events, including modifing events
         removeEvent();
-        CARDS_CONTAINER.classList = "edit"
+        // set cards events to edit
+        editSetup();
+        // create cancel button, and set event
         createCancelBtn();
     } else if (ev.target.classList[1] === "remove") {
+        // reset cards events, including modifing events
         removeEvent();
-        CARDS_CONTAINER.classList = "remove"
+        // set cards events to remove
+        removeSetup();
+        // create cancel button, and set event
         createCancelBtn();
     } else if (ev.target.classList[1] === "ob_add") {
         MODAL_CONTAINER.classList.add("active");
@@ -264,15 +447,4 @@ window.onload = () => {
     actionsContainer.querySelector("button.action.add").addEventListener("click", showModal);
     actionsContainer.querySelector("button.action.edit").addEventListener("click", showModal);
     actionsContainer.querySelector("button.action.remove").addEventListener("click", showModal);
-
-    // if url contains "/session/" then show save app modal
-    if (window.location.pathname.includes("/session/")) {
-        if (
-            (("standalone" in window.navigator) && !window.navigator.standalone) // ios
-            ||
-            (!window.matchMedia(' (display-mode: standalone)').matches)) // android
-            addToHomescreen();
-        else console.log("App installed");
-    }
-
 };

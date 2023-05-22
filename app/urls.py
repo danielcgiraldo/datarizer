@@ -9,4 +9,6 @@ urlpatterns = [
     path('new/', new),
     path('session/<slug:session>/', session),
     path('api/add/<slug:event>', create_event),
+    path('api/remove/<slug:event>', remove_event),
+    path('api/modify/<slug:event>/<slug:new>', modify_event),
 ]

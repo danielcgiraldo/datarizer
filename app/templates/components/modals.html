@@ -11,10 +11,13 @@
         <form method="post">
 
             <div class="form-group">
-                <label for="">Nuevo Nombre</label>
-                <input type="text" name="" id="">
+                <label for="edit-event">Nuevo Nombre</label>
+                <input type="text" name="event" id="edit-event">
+                <label for="edit-event" class="error"></label>
             </div>
+            <input type="hidden" name="last">
             <button type="submit">Guardar <img src="{% static 'img/save.svg' %}" alt="Guardar Cambio"></button>
+            <span><strong>INFORMACIÓN:</strong> Editar un evento implica editar todos los registros del mismo.</span>
         </form>
     </div>
     <div class="modal add">
@@ -46,7 +49,7 @@
                     class="goto" src="{% static 'img/arrow.svg' %}" alt=""></button>
             <button class="save"><img src="{% static 'img/save_line.svg' %}" alt=""> Guardar repositorio <img
                     class="goto" src="{% static 'img/arrow.svg' %}" alt=""></button>
-            <button class="get"><img src="{% static 'img/plus.svg' %}" alt=""> Nuevo repositorio <img class="goto"
+            <button class="new"><img src="{% static 'img/plus.svg' %}" alt=""> Nuevo repositorio <img class="goto"
                     src="{% static 'img/arrow.svg' %}" alt=""></button>
             <button class="get"><img src="{% static 'img/reload.svg' %}" alt=""> Recuperar repositorio <img class="goto"
                     src="{% static 'img/arrow.svg' %}" alt=""></button>
@@ -77,5 +80,21 @@
             </div>
             <button type="submit">Crear <img src="{% static 'img/save.svg' %}" alt="Guardar Cambio"></button>
         </form>
+    </div>
+    <div class="modal confirm">
+        <div class="title">
+            <h3>Eliminar Evento</h3>
+            <button class="close">
+                <span>+</span>
+            </button>
+        </div>
+        <div class="modal-content">
+            <p>¿Estás seguro de que quieres eliminar este evento?</p>
+            <div class="buttons">
+                <button class="cancel">Cancelar</button>
+                <button class="delete">Eliminar</button>
+            </div>
+            <span><strong>ADVERTENCIA:</strong> Eliminar un evento implica eliminar todos los registros del mismo.</span>
+        </div>
     </div>
 </div>
