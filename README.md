@@ -1,8 +1,21 @@
-# Datarizer
+[![Datarizer](https://datarizer.vercel.app/static/img/og.png)](https://datarizer.vercel.app)
+
+<p align="center">
+  <a aria-label="Vercel logo" href="https://vercel.com">
+    <img src="https://badgen.net/badge/icon/Powered%20by%20Vercel?icon=zeit&label&color=black&labelColor=black">
+  </a>
+  <br/>
+  <a aria-label="Release" href="https://github.com/danielcgiraldo/datarizer/blob/main/LICENSE">
+    <img alt="Release" src="https://badgen.net/github/release/danielcgiraldo/datarizer">
+  </a>
+  <a aria-label="License" href="https://github.com/danielcgiraldo/datarizer/blob/main/LICENSE">
+    <img alt="LICENSE: MIT" src="https://badgen.net/github/license/danielcgiraldo/datarizer">
+  </a>
+</p>
+
+## Introducción
 
 Datarizer es una herramienta para registrar datos manualmente y exportarlos a un archivo CSV. Es ideal para registrar datos de experimentos, eventos, etc.
-
-## Características
 
 - Registro de eventos
 - Registro de datos
@@ -55,7 +68,7 @@ Por favor, informa problemas y solicita funcionalidades en [GitHub Issues].
 
 1. Haz un "Fork"
 2. Crea una nueva rama para tu funcionalidad
-3. Realiza tus cambios que consideres necesarios
+3. Realiza los cambios que consideres necesarios
 4. Sube la rama
 5. Crea una nueva solicitud para integrar tus cambios ("Pull Request")
 
@@ -73,4 +86,4 @@ Dado que tus datos son accesibles a través de un enlace y no existen medidas de
 
 Datarizer está bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para obtener más detalles.
 
-[![License: MIT](https://img.shields.io/github/license/danielcgiraldo/datarizer)](LICENSE)
+[![License: MIT](https://badgen.net/github/license/danielcgiraldo/datarizer)](LICENSE)
