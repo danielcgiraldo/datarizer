@@ -5,6 +5,8 @@ from app.views import index, session, new
 from app.controllers.events import *
 from app.controllers.export import export_data
 
+# Define the URL paths for the app
+
 urlpatterns = [
     path('', index),
     path('new/', new),

@@ -1,3 +1,7 @@
+/**
+ * Represents a Clock object.
+ * @param {HTMLElement} container - The container element for the clock.
+ */
 class Clock {
     constructor(container) {
         this.container = container;
@@ -6,6 +10,7 @@ class Clock {
     }
 
     start() {
+        // Every second, update the time
         this.interval = setInterval(() => {
             this.time = new Date();
             this.render();
@@ -13,10 +18,13 @@ class Clock {
     }
 
     stop() {
+        // Stop the clock
         clearInterval(this.interval);
     }
 
     render() {
+
+        // Place date values in DOM
 
         const dateOptions = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
         const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
@@ -26,6 +34,8 @@ class Clock {
         this.container.querySelector("span").innerHTML = this.time.toLocaleTimeString(undefined, { hour: 'numeric', hour12: true }).slice(-2);
     }
 }
+
+/* ==================== MAIN VARIABLES ==================== */
 
 let card_i = 0;
 const COLORS = [
@@ -49,14 +59,19 @@ const MESSAGE_CONTAINER = document.getElementById("message-container");
 let MODAL_EVENTS = []
 let CARD_EVENTS = []
 
+/* ==================== FUNCTIONS ==================== */
+
+/**
+ * Creates an event card.
+ * @param {string} name - The name of the event.
+ */
 function addEvent(name) {
     try {
         if (card_i > COLORS.length - 1) {
             //show error label
             return;
         }
-
-
+        // Create and insert card in DOM
         const card = document.createElement("button");
         card.classList.add("card");
         card.style.setProperty("--bg-color", COLORS[card_i]);
@@ -78,7 +93,9 @@ function addEvent(name) {
     }
 }
 
-
+/**
+ * Remove edit and remove events from cards.
+ */
 function removeEvent() {
     resetCardEvents();
     const event = CARDS_CONTAINER.classList[0]
@@ -86,6 +103,9 @@ function removeEvent() {
     CARDS_CONTAINER.classList = "";
 }
 
+/**
+ * Creates a cancel button, and set its remove event.
+ */
 function createCancelBtn() {
     const cancelBtn = document.createElement('button');
     cancelBtn.classList.add('cancel');
@@ -94,12 +114,19 @@ function createCancelBtn() {
     cancelBtn.addEventListener('click', removeEvent)
 }
 
+/**
+ * Remove modal and its events.
+ * Reset cards events to default, and remove modifing events.
+ */
 function removeModalandEvent() {
     removeModal();
     removeEvent();
     defaultCardsEvents();
 }
 
+/**
+ * Remove modal and its events.
+ */
 function removeModal() {
     try {
         MODAL_CONTAINER.classList.remove("active");
@@ -116,6 +143,10 @@ function removeModal() {
     }
 }
 
+/**
+ * Initialize the events listeners to handle modal closing.
+ * @param {HTMLElement} modal - Modal element to handle remove.
+ */
 function handleRemoveModal(modal) {
     const CLOSE_BTN = modal.querySelector("button.close");
 
@@ -135,7 +166,11 @@ function handleRemoveModal(modal) {
     MODAL_EVENTS.push([CLOSE_BTN, close_handler]);
 }
 
-
+/**
+ * Initialize the events listeners to handle modal closing.
+ * When modal closing, also set default cards events.
+ * @param {HTMLElement} modal - Modal element to handle remove.
+ */
 function handleRemoveModalandEvents(modal) {
     const CLOSE_BTN = modal.querySelector("button.close");
 
@@ -155,6 +190,10 @@ function handleRemoveModalandEvents(modal) {
     MODAL_EVENTS.push([CLOSE_BTN, close_handler]);
 }
 
+/**
+ * Handle all buttons events on session modal.
+ * @param {HTMLElement} modal - Modal element to handle events.
+ */
 function setSessionModal(modal) {
     const share_handler = () => {
         const session = modal.querySelector("h3").innerHTML;
@@ -207,6 +246,10 @@ function setSessionModal(modal) {
     MODAL_EVENTS.push([modal.querySelector("button.new"), new_repo]);
 }
 
+/**
+ * Initialize the events listeners to handle Add Event button.
+ * @param {HTMLElement} modal - Modal element to handle.
+ */
 function setAddModal(modal) {
     // =============== ADD EVENT ===============
     const submit_handler = async (ev) => {
@@ -245,6 +288,9 @@ function setAddModal(modal) {
 
 }
 
+/**
+ * Remove all cards events.
+ */
 function resetCardEvents() {
     CARD_EVENTS.forEach(event => {
         try {
@@ -255,6 +301,10 @@ function resetCardEvents() {
     CARD_EVENTS = [];
 }
 
+/**
+ * Set default event for all cards. (Register event)
+ * @param {HTMLElement} card - If card is set, only reset it.
+ */
 function defaultCardsEvents(card = null) {
     // The default event for the cards
     const cards = CARDS_CONTAINER.querySelectorAll("button.card");
@@ -309,6 +359,9 @@ function defaultCardsEvents(card = null) {
     });
 }
 
+/**
+ * Initialize the events listeners to handle Remove Event button.
+ */
 function removeSetup() {
     CARDS_CONTAINER.classList = "remove"
     const cards = CARDS_CONTAINER.querySelectorAll("button.card");
@@ -369,6 +422,9 @@ function removeSetup() {
     });
 }
 
+/**
+ * Initialize the events listeners to handle Edit Event button.
+ */
 function editSetup() {
     CARDS_CONTAINER.classList = "edit"
     const cards = CARDS_CONTAINER.querySelectorAll("button.card");
@@ -424,6 +480,10 @@ function editSetup() {
     });
 }
 
+/**
+ * All modal opening events.
+ * @param {EventListener} ev - Button element that trigger the modal.
+ */
 function showModal(ev) {
     if (ev.target.id == "session-handler") {
         MODAL_CONTAINER.classList.add("active");
@@ -463,6 +523,11 @@ function showModal(ev) {
     }
 }
 
+/* ==================== MAIN ==================== */
+
+/**
+ * Run all the code when the page is loaded.
+ */
 window.onload = () => {
     // =============== CLOCK ===============
 
